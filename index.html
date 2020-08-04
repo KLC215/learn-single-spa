@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Single SPA</title>
+  </head>
+  <body>
+    <script src="/lib/umd/single-spa.js"></script>
+    <script>
+      singleSpa.registerApplication(
+        // 1. application name
+        "app1",
+        // 2. load application with promise
+        async (props) => {
+          console.log("load app1");
+
+          return {
+            bootstrap: [
+              async () => {
+                console.log("app1 bootstrap1");
+              },
+              async () => {
+                console.log("app1 bootstrap2");
+              },
+              async () => {
+                console.log("app1 bootstrap3");
+              },
+            ],
+            mount: async () => {
+              console.log("app 1 mount");
+            },
+            unmount: async () => {
+              console.log("app 1 unmount");
+            },
+          };
+        },
+        // 3. Match location to load application
+        (location) => location.hash.startsWith("#/app1"),
+        // 4. Accept custom properties
+        { store: { name: "zf", age: 10 } }
+      );
+      singleSpa.registerApplication(
+        // 1. application name
+        "app2",
+        // 2. load application with promise
+        async (props) => {
+          console.log("load app2");
+
+          return {
+            bootstrap: [
+              async () => {
+                console.log("app2 bootstrap1");
+              },
+              async () => {
+                console.log("app2 bootstrap2");
+              },
+              async () => {
+                console.log("app2 bootstrap3");
+              },
+            ],
+            mount: async () => {
+              console.log("app2 mount");
+            },
+            unmount: async () => {
+              console.log("app2 unmount");
+            },
+          };
+        },
+        // 3. Match location to load application
+        (location) => location.hash.startsWith("#/app2"),
+        // 4. Accept custom properties
+        { store: { name: "zf", age: 10 } }
+      );
+
+      // 5. Start application
+      singleSpa.start();
+
+      /*
+        "registerApplication" will load application by default
+        "start" will mount the application
+      */
+    </script>
+  </body>
+</html>

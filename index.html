@@ -6,25 +6,37 @@
     <title>Single SPA</title>
   </head>
   <body>
+    <h2>hash router</h2>
+    <div><a href="#/app1">App 1</a> <a href="#/app2">App 2</a></div>
+    <h2>browser router</h2>
+    <div><button onclick="app3()">App 3</button> <button onclick="app4()">App 4</button></div>
+
     <script src="/lib/umd/single-spa.js"></script>
     <script>
+      function app3() {
+        history.pushState({}, "", "/app3");
+      }
+      function app4() {
+        history.pushState({}, "", "/app4");
+      }
+
       singleSpa.registerApplication(
         // 1. application name
         "app1",
         // 2. load application with promise
         async (props) => {
-          console.log("load app1");
+          console.log("load app 1");
 
           return {
             bootstrap: [
               async () => {
-                console.log("app1 bootstrap1");
+                console.log("app 1 bootstrap1");
               },
               async () => {
-                console.log("app1 bootstrap2");
+                console.log("app 1 bootstrap2");
               },
               async () => {
-                console.log("app1 bootstrap3");
+                console.log("app 1 bootstrap3");
               },
             ],
             mount: async () => {
@@ -45,30 +57,94 @@
         "app2",
         // 2. load application with promise
         async (props) => {
-          console.log("load app2");
+          console.log("load app 2");
 
           return {
             bootstrap: [
               async () => {
-                console.log("app2 bootstrap1");
+                console.log("app 2 bootstrap1");
               },
               async () => {
-                console.log("app2 bootstrap2");
+                console.log("app 2 bootstrap2");
               },
               async () => {
-                console.log("app2 bootstrap3");
+                console.log("app 2 bootstrap3");
               },
             ],
             mount: async () => {
-              console.log("app2 mount");
+              console.log("app 2 mount");
             },
             unmount: async () => {
-              console.log("app2 unmount");
+              console.log("app 2 unmount");
             },
           };
         },
         // 3. Match location to load application
         (location) => location.hash.startsWith("#/app2"),
+        // 4. Accept custom properties
+        { store: { name: "zf", age: 10 } }
+      );
+      singleSpa.registerApplication(
+        // 1. application name
+        "app3",
+        // 2. load application with promise
+        async (props) => {
+          console.log("load app 3");
+
+          return {
+            bootstrap: [
+              async () => {
+                console.log("app 3 bootstrap1");
+              },
+              async () => {
+                console.log("app 3 bootstrap2");
+              },
+              async () => {
+                console.log("app 3 bootstrap3");
+              },
+            ],
+            mount: async () => {
+              console.log("app 3 mount");
+            },
+            unmount: async () => {
+              console.log("app 3 unmount");
+            },
+          };
+        },
+        // 3. Match location to load application
+        (location) => location.pathname.startsWith("/app3"),
+        // 4. Accept custom properties
+        { store: { name: "zf", age: 10 } }
+      );
+      singleSpa.registerApplication(
+        // 1. application name
+        "app4",
+        // 2. load application with promise
+        async (props) => {
+          console.log("load app 4");
+
+          return {
+            bootstrap: [
+              async () => {
+                console.log("app 4 bootstrap1");
+              },
+              async () => {
+                console.log("app 4 bootstrap2");
+              },
+              async () => {
+                console.log("app 4 bootstrap3");
+              },
+            ],
+            mount: async () => {
+              console.log("app 4 mount");
+            },
+            unmount: async () => {
+              console.log("app 4 unmount");
+            },
+          };
+        },
+        // 3. Match location to load application
+        (location) => location.pathname.startsWith("/app4"),
         // 4. Accept custom properties
         { store: { name: "zf", age: 10 } }
       );

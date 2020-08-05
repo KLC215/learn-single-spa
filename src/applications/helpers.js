@@ -19,7 +19,7 @@ export const UNMOUNTING = "UNMOUNTING";
 // Application is destroying
 export const UNLOADING = "UNLOADING";
 // Errors occurred when loading application
-export const LOAD_ERR = "LOAD_ERR";
+export const LOAD_ERROR = "LOAD_ERROR";
 // Skip application
 export const SKIP_BECAUSE_BROKEN = "SKIP_BECAUSE_BROKEN";
 

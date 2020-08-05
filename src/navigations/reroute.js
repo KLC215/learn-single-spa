@@ -4,6 +4,7 @@ import { toLoadPromise } from "../lifecycles/load";
 import { toMountPromise } from "../lifecycles/mount";
 import { toUnmountPromise } from "../lifecycles/unmount";
 import { started } from "../start";
+import "./navigator-events";
 
 // !!! CORE
 export function reroute() {
